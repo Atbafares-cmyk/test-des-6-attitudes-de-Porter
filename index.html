@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test d'Elias Porter - mes attitudes en situation de communication</title>
+<meta name="description" content="Autodiagnostic des comportements spontanés en situation de communication, avec résultat sur six attitudes.">
+<script>
+(function(){try{var t=localStorage.getItem('theme-23mindset');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#12131a; --card:#1c1e29; --ink:#f2f3f8; --muted:#a9adc0; --line:#323648;
+  --accent:#C4B5FD; --on-accent:#14102a; --soft:#2a2547; --ok:#6ee7a8; --warn:#fbbf6a; --focus:#ffffff;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f5f6fb; --card:#ffffff; --ink:#1b1d2a; --muted:#585c72; --line:#d9dcea;
+  --accent:#5B34B8; --on-accent:#ffffff; --soft:#ece8fb; --ok:#14804a; --warn:#9a5b00; --focus:#000000;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f5f6fb; --card:#ffffff; --ink:#1b1d2a; --muted:#585c72; --line:#d9dcea;
+    --accent:#5B34B8; --on-accent:#ffffff; --soft:#ece8fb; --ok:#14804a; --warn:#9a5b00; --focus:#000000;
+    color-scheme:light;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:16px 16px 96px}
+main{max-width:720px;margin:0 auto}
+h1{font-size:1.55rem;line-height:1.25;margin:.2em 0 .3em}
+h2{font-size:1.25rem;margin:1.2em 0 .4em}
+p{margin:.5em 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
+.kicker{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.muted{color:var(--muted)}
+.btn{display:block;width:100%;min-height:52px;border:0;border-radius:14px;background:var(--accent);color:var(--on-accent);font:inherit;font-weight:700;padding:12px 16px;cursor:pointer;margin:10px 0;text-align:center}
+.btn.alt{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px}
+.row .btn{margin:10px 0}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible+label{outline:3px solid var(--focus);outline-offset:2px}
+.progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0}
+.progress>i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.dots{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.dots button{min-width:44px;min-height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.dots button.done{background:var(--soft);border-color:var(--accent)}
+.dots button.cur{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.quote{border-left:5px solid var(--accent);padding:6px 0 6px 14px;margin:12px 0;font-style:italic}
+.opt{position:relative;margin:10px 0}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt label{display:flex;gap:12px;align-items:flex-start;padding:14px;border:2px solid var(--line);border-radius:14px;background:var(--card);cursor:pointer}
+.opt label b{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--ink)}
+.opt input:checked+label{border-color:var(--accent);background:var(--soft)}
+.opt input:checked+label b{background:var(--accent);color:var(--on-accent)}
+.bar{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;margin:12px 0}
+.bar .track{grid-column:1 / -1;height:14px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar .track i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.bar.top .track i{background:var(--ok)}
+.bar span.n{font-weight:800}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--soft);border:1px solid var(--line)}
+details{border:1px solid var(--line);border-radius:12px;background:var(--card);margin:10px 0;padding:6px 14px}
+summary{cursor:pointer;font-weight:700;padding:8px 0;min-height:44px}
+.chosen{border-color:var(--accent);background:var(--soft)}
+.li{padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin:6px 0}
+footer{max-width:720px;margin:28px auto 0;font-size:.82rem;color:var(--muted);text-align:center}
+#theme-toggle{position:fixed;right:14px;bottom:14px;z-index:9;min-height:48px;padding:0 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.hidden{display:none!important}
+.sticky{position:sticky;bottom:0;background:var(--bg);padding:6px 0 10px}
+@media print{
+  :root,:root[data-theme="dark"]{--bg:#fff;--card:#fff;--ink:#000;--muted:#333;--line:#bbb;--accent:#5B34B8;--on-accent:#fff;--soft:#eee;--ok:#14804a;--warn:#7a4800}
+  #theme-toggle,.btn,.dots,.sticky{display:none!important}
+  body{padding:0}
+  details{display:block}
+  details>*{display:block}
+}
+</style>
+</head>
+<body>
+<main id="app">
+
+<section id="home" class="card">
+  <div class="kicker">Test d'Elias Porter</div>
+  <h1>Autodiagnostic des comportements spontan&eacute;s en situation de communication</h1>
+  <p><b>10 situations</b> &middot; environ <b>10 minutes</b> &middot; seul, sur votre t&eacute;l&eacute;phone</p>
+  <p>Vous allez lire 10 fragments de situation de communication et, pour chacun d'eux, six r&eacute;ponses diff&eacute;rentes.</p>
+  <p>Lisez attentivement ce que dit la personne, en imaginant cette personne et la situation qu'elle d&eacute;crit comme &eacute;tant la v&ocirc;tre. Puis supposez que vous ayez &agrave; lui r&eacute;pondre : sans chercher s'il y a une bonne ou une mauvaise r&eacute;ponse, choisissez la r&eacute;ponse qui se rapproche le plus de celle que vous auriez eu envie de lui faire.</p>
+  <p class="muted">Votre r&eacute;sultat reste sur votre t&eacute;l&eacute;phone : rien n'est envoy&eacute; ni enregistr&eacute;.</p>
+  <button class="btn" id="start" type="button">Commencer</button>
+</section>
+
+<section id="quiz" class="hidden" aria-live="polite">
+  <div class="kicker" id="qkicker"></div>
+  <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+  <div class="dots" id="dots" role="group" aria-label="Choisir une situation"></div>
+  <div class="card">
+    <p class="muted" id="qwho"></p>
+    <p class="quote" id="qsay"></p>
+    <p><b>Votre r&eacute;ponse :</b></p>
+    <div id="opts" role="radiogroup" aria-label="Votre r&eacute;ponse"></div>
+  </div>
+  <div class="row">
+    <button class="btn alt" id="prev" type="button">&larr; Pr&eacute;c&eacute;dente</button>
+    <button class="btn alt" id="next" type="button">Suivante &rarr;</button>
+  </div>
+  <button class="btn" id="see" type="button" disabled>Voir mon r&eacute;sultat</button>
+  <p class="muted" id="left" style="text-align:center;margin:0"></p>
+</section>
+
+<section id="result" class="hidden" aria-live="polite">
+  <div class="kicker">Mon r&eacute;sultat</div>
+  <h1>Mes attitudes spontan&eacute;es</h1>
+  <p class="muted">Il n'y a ni bonne ni mauvaise r&eacute;ponse : ce profil d&eacute;crit vos r&eacute;flexes dans une situation de communication. Le total de vos six scores est &eacute;gal &agrave; 10.</p>
+  <div class="card" id="bars"></div>
+  <p><b id="topline"></b></p>
+  <h2>Ce que signifie chaque attitude</h2>
+  <div id="explain"></div>
+  <div class="card">
+    <div class="kicker">Dans la formation</div>
+    <p>L'&eacute;coute active s'appuie sur la <b>reformulation</b> (attitude de compr&eacute;hension) et sur les <b>questions</b> (attitude d'investigation). Notez l'attitude que vous utilisez le plus, et celle que vous voudriez utiliser davantage.</p>
+  </div>
+  <h2>Ma grille, situation par situation</h2>
+  <p class="muted">Pour chaque situation : votre r&eacute;ponse, et l'attitude que chacune des six r&eacute;ponses repr&eacute;sente.</p>
+  <div id="grille"></div>
+  <button class="btn" id="again" type="button">Recommencer le test</button>
+</section>
+
+</main>
+<footer>&copy; 2026 - 23 MindSet - Fares ATBA<br>D'apr&egrave;s le livret d'exercices Excellens Formation - mise en forme num&eacute;rique 23 MindSet - Fares ATBA</footer>
+<button id="theme-toggle" type="button" aria-label="Changer l'affichage clair ou sombre">&#9728; Clair</button>
+<script>var DATA={"att": [{"id": "jugement", "name": "Évaluation-jugement", "desc": "Vos réponses sont évaluatives, c'est à dire qu'elles impliquent un point de vue moral personnel et comportent un jugement de valeur à l'égard d'autrui. Le jugement est porté, par exemple sur votre interlocuteur, sur son comportement, sur sa personnalité, sur ses réactions, sur ses propos ..."}, {"id": "interpretation", "name": "Interprétation", "desc": "Vos réponses sont des interprétations de ce qui est dit. Vous ne comprenez que ce que vous voulez comprendre, votre esprit cherche une explication. En fait, vous opérez une distorsion par rapport à ce qui vous est dit et vous déformez la pensée de l'autre."}, {"id": "soutien", "name": "Soutien", "desc": "Vos réponses sont des réponses de soutien, visant à apporter une consolation ou un encouragement. Vous compatissez et vous pensez qu'il faut éviter qu'autrui ne dramatise."}, {"id": "enquete", "name": "Investigation-enquête (question)", "desc": "Vos réponses sont investigatrices. Vous cherchez à en savoir davantage, vous orientez l'entretien vers ce qui vous paraît important."}, {"id": "decision", "name": "Solution-décision", "desc": "Vos réponses tendent à apporter une solution immédiate au problème de l'autre. Vous réagissez par l'action et en poussant à l'action. Vous voyez tout de suite l'issue que vous, vous choisiriez, vous n'attendez pas d'en savoir davantage."}, {"id": "comprehension", "name": "Compréhension (reformulation)", "desc": "Vos réponses sont compréhensives et reflètent un effort pour vous introduire sincèrement dans la difficulté telle qu'elle est vécue par l'autre. Vous voulez vérifier que vous avez bien compris ce qui a été dit."}], "grid": {"jugement": [4, 3, 1, 6, 2, 5, 3, 1, 6, 6], "interpretation": [3, 6, 2, 4, 4, 4, 5, 6, 2, 4], "soutien": [1, 2, 6, 2, 1, 6, 1, 4, 5, 2], "enquete": [6, 1, 3, 3, 3, 3, 4, 2, 1, 3], "decision": [2, 5, 4, 5, 5, 1, 2, 5, 3, 5], "comprehension": [5, 4, 5, 1, 6, 2, 6, 3, 4, 1]}, "cases": [{"who": "Un collaborateur s'adresse à vous :", "say": "J'ai un problème pour terminer le travail que vous m'avez demandé. J'ai bien réuni tous les éléments, mais j'ai du mal à les regrouper pour mettre en évidence les points importants.", "resp": ["Je comprends bien, c'est un travail difficile dont vous n'avez pas l'habitude.", "J'ai une idée : allez voir Paul DURAND, il a l'habitude de ce genre de travail ; il pourra sans aucun doute vous indiquer un moyen.", "Si je comprends bien, vous voulez que je vous aide à terminer.", "Je vous ai pourtant déjà expliqué comment vous y prendre, vous devriez être persévérant.", "Vous avez des difficultés à faire la synthèse.", "Comment vous y êtes-vous pris pour regrouper les différents éléments ?"]}, {"who": "Un collègue :", "say": "Dites, vous avez remarqué la tête d'André ce matin, je me demande s'il n'a pas eu encore des histoires avec Michel, je l'aime bien André moi et cela m'énerve. Je ne voudrais pas qu'il ait des problèmes.", "resp": ["Vous avez du nouveau ? Qu'est-ce qui s'est passé ?", "Ne vous faites pas de souci, ça va s'arranger, je le connais Michel ; il finira par se calmer.", "Vous attachez trop d'importance à ces histoires, ce n'est pas la peine de se mêler de ça.", "Vous vous faites du souci pour André à cause de son différend avec Michel.", "Vous n'avez qu'à déjeuner avec lui ce midi, pour lui remonter le moral.", "Si André fait la tête, c'est sûrement qu'il a eu un nouveau problème avec Michel et que cette fois-ci c'est plus grave que d'habitude."]}, {"who": "Une employée :", "say": "Je voudrais partir plus tôt ce soir ; ma voiture est chez le garagiste et il faut absolument que je la récupère pour aller chercher ma fille à la crèche et si je pars à 18 heures comme d'habitude je n'y arriverai pas.", "resp": ["C'est la troisième fois ce mois-ci que vous demandez à partir plus tôt, vous devriez comprendre que ça contrarie la bonne marche du service.", "Vous souhaitez partir plus tôt pour arriver avant la fermeture du garage.", "A quelle heure voulez-vous partir ?", "Allez-y, vous récupérerez dans la semaine.", "Vous voulez mon accord pour partir plus tôt.", "En effet, ce n'est pas drôle et ça doit pouvoir s'arranger, est-ce qu'en partant à 17 heures au lieu de 18 heures ça va ?"]}, {"who": "Un collaborateur :", "say": "Cela fait quatre ans que je fais le même travail, j'arrive un peu à bout, ce n'est pas drôle de faire toujours la même chose, j'ai l'impression de bien faire ce que j'ai à faire, mais ça ne suffit pas, j'ai besoin d'autre chose, de faire à nouveau mes preuves par exemple.", "resp": ["Au bout de quatre ans, vous pensez avoir fait le tour de votre fonction et vous êtes prêt à assumer des tâches plus difficiles.", "Je comprends votre souci d'enrichir vos fonctions, c'est vrai que votre travail actuel n'est plus très passionnant.", "Avez-vous une idée de ce que vous voulez faire ?", "En somme, vous voudriez changer de poste ?", "Je vous propose d'en discuter avec le chef du personnel afin d'envisager une mutation dans un autre service.", "Vous êtes bien impatient, et cela m'étonnerait que vous ayez complètement fait le tour de votre fonction actuelle, prenez donc le temps d'y réfléchir."]}, {"who": "Un collègue :", "say": "Qu'est-ce que c'est que cette histoire, ça fait quatre fois que le chef me fait refaire ce travail, faudrait savoir ce qu'il veut tout de même. En tout cas, moi je n'ai aucune envie de recommencer une cinquième fois, je n'ai pas que ça à faire quand même.", "resp": ["Ce n'est rien mon vieux, ça va s'arranger. Vous savez bien qu'avec le nouveau patron, le chef est dans ses petits souliers, avec le temps ça s'arrangera.", "Du calme, ce n'est pas en vous mettant dans des états pareils que vous résoudrez un tel problème, enfin !", "Savez-vous les raisons pour vous faire refaire ce travail ?", "En fait, vous voulez que j'intervienne auprès du chef pour lui faire part de vos remarques.", "Pourquoi ne poseriez-vous pas ce problème en réunion d'expression après demain ?", "Vous êtes en colère contre le chef et vous venez vous plaindre auprès de moi d'avoir à refaire plusieurs fois le même travail alors que vous avez d'autres travaux à faire."]}, {"who": "Un collègue :", "say": "Voilà, je ne sais comment dire ... euh, et bien voilà, enfin il ne faudrait pas que vous croyiez que je lui veux du mal. Mais vous savez le nouveau, il en prend à son aise, faut voir comment il se comporte avec les employées, il a une manière de leur parler ... et puis il est toujours à traîner partout avec son air de Sainte Nitouche, vous savez pendant ce temps-là, le travail n'avance pas ...", "resp": ["Vous devriez en parler avec lui pour faire le point.", "Vous avez des reproches à faire à l'encontre de votre nouveau collègue et vous êtes un peu gêné de m'en parler n'est-ce-pas ?", "Avez-vous eu des plaintes de la part des employées ?", "Si vous avez des griefs contre votre collègue c'est sans doute parce que vous êtes obligé de faire le travail à sa place.", "C'est pas très joli de dire du mal comme ça d'un collègue qui vient d'arriver ...", "Je vous plains, vous n'avez pas de chance d'avoir hérité d'un pareil collègue, à espérer que ça lui passe avec le temps ..."]}, {"who": "Un collaborateur :", "say": "Avez-vous cinq minutes à me consacrer ? C'est à propos de l'affaire Henri ...", "resp": ["Bien sûr, c'est important que l'on puisse discuter ensemble de cette affaire. En quoi puis-je vous être utile ?", "Non pas maintenant, cet après-midi à 14 heures, OK ?", "Qu'est-ce qui se passe encore ?", "Qu'avez-vous de nouveau à propos de l'affaire Henri ?", "Vous voulez sans doute me dire que cette affaire est terminée ?", "Vous voulez que l'on discute maintenant du cas Henri ?"]}, {"who": "Un collaborateur :", "say": "Je pense que si je suivais un stage de formation aux relations humaines, par exemple un d'animation d'une équipe, j'aurais sûrement plus de facilités à diriger mon personnel.", "resp": ["C'est très bien ça, j'apprécie votre attitude. Cela dénote une certaine remise en cause de votre part, je vous félicite.", "Quelles genres de difficultés éprouvez-vous avec votre personnel ?", "Vous estimez qu'un stage de management améliorerait vos compétences d'encadrement ?", "Je suis content pour vous, vous allez d'ailleurs sûrement trouver le stage qu'il vous faut, j'ai d'ailleurs là une documentation qui pourrait vous intéresser.", "La meilleure solution c'est de vous inscrire à la formation intra qui débute le mois prochain, je téléphone tout de suite au responsable de formation pour faire le nécessaire.", "Si vous souhaitez suivre un stage, c'est parce que la plupart des cadres ont déjà suivi avec succès une telle formation."]}, {"who": "Paul, cadre, dans une grande entreprise parisienne :", "say": "Moi, je voudrais arriver à concilier ma vie personnelle et professionnelle, toujours courir, perdre un temps fou dans les transports ; quand j'arrive chez moi le soir, il est souvent trop tard et je n'arrive pas à faire tout ce que j'ai envie de faire.", "resp": ["Quelles sont les activités que vous aimeriez faire ?", "En somme, vous voudriez vivre et travailler à la campagne ?", "Le bon moyen de concilier vie personnelle et vie professionnelle, c'est un stage de gestion du temps ...", "Métro - boulot - dodo - Ce n'est pas pour vous.", "C'est vrai que la vie parisienne ce n'est pas drôle pour tout le monde, mais c'est bientôt les vacances, vous verrez, ça ira mieux après.", "Allez Paul, il ne faut pas vous mettre des idées comme ça dans la tête, ce n'est pas bon pour le moral."]}, {"who": "Un collègue à qui vous avez demandé son avis sur la restructuration en cours dans l'entreprise :", "say": "Moi je n'en pense rien de spécial, que je reste à mon poste ou que je change, du moment que je reste dans l'entreprise .. Le reste, ce n'est pas mon problème ...", "resp": ["Tu n'as pas d'avis particulier du moment que tu as du travail.", "Avec ta qualification tu n'as pas de souci à te faire, de toutes façons tu auras toujours du travail ici.", "Et que penserais-tu si ton poste était menacé ?", "Ton avis serait sûrement différent si tu venais à perdre ton travail.", "Allez, tu penses sûrement à quelque chose et je sais bien que c'est aussi ton problème.", "Tu devrais être plus concerné : c'est grave quand même."]}]};
+(function(){
+  var N=DATA.cases.length, ans=new Array(N).fill(null), cur=0;
+  var $=function(id){return document.getElementById(id);};
+  var attName={}; DATA.att.forEach(function(a){attName[a.id]=a.name;});
+  // attitude de chaque réponse : attOf[cas][numéro-1]
+  var attOf=[]; for(var i=0;i<N;i++){attOf.push(new Array(6));DATA.att.forEach(function(a){attOf[i][DATA.grid[a.id][i]-1]=a.id;});}
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+  function show(id){['home','quiz','result'].forEach(function(x){$(x).classList.toggle('hidden',x!==id);});window.scrollTo(0,0);}
+  function answered(){return ans.filter(function(a){return a!==null;}).length;}
+  function renderDots(){
+    var h='';for(var i=0;i<N;i++){h+='<button type="button" data-i="'+i+'" class="'+(i===cur?'cur':(ans[i]!==null?'done':''))+'" aria-label="Situation '+(i+1)+(ans[i]!==null?' (répondue)':'')+'">'+(i+1)+'</button>';}
+    $('dots').innerHTML=h;
+    Array.prototype.forEach.call($('dots').children,function(b){b.addEventListener('click',function(){cur=+b.getAttribute('data-i');renderQ();});});
+  }
+  function renderQ(){
+    var c=DATA.cases[cur];
+    $('qkicker').textContent='Situation '+(cur+1)+' sur '+N;
+    $('pbar').style.width=(answered()/N*100)+'%';
+    $('qwho').textContent=c.who;
+    $('qsay').textContent='« '+c.say+' »';
+    var h='';c.resp.forEach(function(r,k){
+      h+='<div class="opt"><input type="radio" name="r" id="o'+k+'" value="'+(k+1)+'"'+(ans[cur]===k+1?' checked':'')+'><label for="o'+k+'"><b>'+(k+1)+'</b><span>'+esc(r)+'</span></label></div>';
+    });
+    $('opts').innerHTML=h;
+    Array.prototype.forEach.call($('opts').querySelectorAll('input'),function(inp){inp.addEventListener('change',function(){ans[cur]=+inp.value;update();renderDots();});});
+    $('prev').disabled=cur===0; $('next').disabled=cur===N-1;
+    renderDots(); update();
+  }
+  function update(){
+    var left=N-answered();
+    $('see').disabled=left>0;
+    $('left').textContent=left>0?('Il reste '+left+' situation'+(left>1?'s':'')+' sans réponse.'):'Toutes les situations ont une réponse.';
+    $('pbar').style.width=(answered()/N*100)+'%';
+  }
+  function result(){
+    var sc={};DATA.att.forEach(function(a){sc[a.id]=0;});
+    ans.forEach(function(a,i){sc[attOf[i][a-1]]++;});
+    var max=Math.max.apply(null,DATA.att.map(function(a){return sc[a.id];}));
+    var bars='',tops=[];
+    DATA.att.forEach(function(a){
+      var top=sc[a.id]===max&&max>0; if(top)tops.push(a.name);
+      bars+='<div class="bar'+(top?' top':'')+'"><span>'+esc(a.name)+'</span><span class="n">'+sc[a.id]+' / 10</span><div class="track"><i style="width:'+(sc[a.id]*10)+'%"></i></div></div>';
+    });
+    $('bars').innerHTML=bars;
+    $('topline').textContent=(tops.length>1?'Vos attitudes les plus fréquentes : ':'Votre attitude la plus fréquente : ')+tops.join(', ')+'.';
+    var order=DATA.att.slice().sort(function(a,b){return sc[b.id]-sc[a.id];});
+    $('explain').innerHTML=order.map(function(a,i){return '<details'+(i===0?' open':'')+'><summary>'+esc(a.name)+' · '+sc[a.id]+' / 10</summary><p>'+esc(a.desc)+'</p></details>';}).join('');
+    var g='';
+    DATA.cases.forEach(function(c,i){
+      g+='<details><summary>Situation '+(i+1)+' · ma réponse : '+ans[i]+' ('+esc(attName[attOf[i][ans[i]-1]])+')</summary>';
+      c.resp.forEach(function(r,k){g+='<div class="li'+(ans[i]===k+1?' chosen':'')+'"><span class="tag">'+(k+1)+' · '+esc(attName[attOf[i][k]])+'</span><br>'+esc(r)+'</div>';});
+      g+='</details>';
+    });
+    $('grille').innerHTML=g;
+    window.__scores=sc; show('result');
+  }
+  $('start').addEventListener('click',function(){cur=0;show('quiz');renderQ();});
+  $('prev').addEventListener('click',function(){if(cur>0){cur--;renderQ();}});
+  $('next').addEventListener('click',function(){if(cur<N-1){cur++;renderQ();}});
+  $('see').addEventListener('click',function(){if(!$('see').disabled)result();});
+  $('again').addEventListener('click',function(){ans=new Array(N).fill(null);cur=0;show('home');});
+})();
+
+
+(function(){
+  var btn=document.getElementById('theme-toggle');
+  function current(){var a=document.documentElement.getAttribute('data-theme');if(a)return a;return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}
+  function label(){btn.textContent=current()==='dark'?'☀ Clair':'☾ Sombre';}
+  btn.addEventListener('click',function(){var n=current()==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('theme-23mindset',n);}catch(e){}label();});
+  label();
+})();
+</script>
+</body>
+</html>
